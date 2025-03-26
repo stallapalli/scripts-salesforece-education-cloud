@@ -118,7 +118,6 @@ To add a new field value into the data mapping, follow these steps:
 ### Example Code
 
 ```powershell
-// filepath: c:\Users\Nick\Projects\TheCommunitySolution\DataMigration\data-migration.ipynb
 # Fetch the RecordTypeId for the College Accounts
 $collegeAccountRT = sf data query -q "SELECT Id FROM RecordType WHERE SObjectType = 'Account' AND DeveloperName = 'College'" -o $source --json |
 ConvertFrom-Json |
@@ -171,7 +170,6 @@ ForEach-Object {
     }
 } | Export-Csv -Path data\InstitutionAccounts.csv -NoTypeInformation -Encoding UTF8
 
-Write-Host ($records | ConvertTo-Json -Depth 2)
 Remove-Variable -Name collegeAccountRT
 ```
 
@@ -266,7 +264,7 @@ sf data query -query "SELECT Id, Name FROM Account" --target-org $source --json
 
 [sf data upsert](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_data_commands_unified.htm#cli_reference_data_upsert_bulk_unified)
 ```powershell
-sf data upsert bulk --file data\InstitutionAccounts.csv -target-org $target --sobject Account --external-id "Name" --json --wait 10
+sf data upsert bulk --file data\InstitutionAccounts.csv --target-org $target --sobject Account --external-id Id --json --wait 10
 ```
 
 ## Notes
