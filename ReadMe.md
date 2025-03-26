@@ -48,9 +48,10 @@ This notebook, `data-migration.ipynb`, contains PowerShell scripts for migrating
 To run the scripts in this notebook, you need to have the following dependencies installed:
 
 1. **Salesforce CLI**: The Salesforce CLI is required to execute Salesforce commands. You can download and install it from [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli).
-2. **PowerShell**: Ensure you have PowerShell installed on your system. The scripts are written in PowerShell and require it to run.
-3. **Jupyter Notebook**: The notebook is written in Jupyter Notebook format and can be run using Jupyter Notebook or JupyterLab.
-4. **File System**: The scripts write data to the file system, so ensure you have the necessary permissions to create and write to the appropriate directories.
+2. **Salesforce Permisisons**: Ensure you have the necessary permissions to query and write data in both the source and target orgs. This includes permissions to access the objects and fields being migrated. There's a special permission set called "Data Migration" that can be assigned to the authorized user to give access to write to the CreatedDate and LastModifiedDate.
+3. **PowerShell**: Ensure you have PowerShell installed on your system. The scripts are written in PowerShell and require it to run.
+4. **Jupyter Notebook**: The notebook is written in Jupyter Notebook format and can be run using Jupyter Notebook or JupyterLab.
+5. **File System**: The scripts write data to the file system, so ensure you have the necessary permissions to create and write to the appropriate directories.
 
 ## Usage
 
@@ -154,19 +155,19 @@ ForEach-Object {
     $billingState = Get-DictionaryEntry -k "states" -v $_.EnrollmentrxRx__School_State_Province__c
 
     return [PSCustomObject]@{
-        Name               = $_.Name
-        Type               = "Partner"
-        RecordTypeId       = $collegeAccountRT
-        BillingStreet      = $_.EnrollmentrxRx__School_Address__c
-        BillingCity        = $_.EnrollmentrxRx__School_City__c
-        BillingStateCode   = $billingState
-        BillingPostalCode  = $_.EnrollmentrxRx__School_Zip__c
-        BillingCountryCode = if ($billingState) { "US" } else { $null }
-        Anthology_ID__c    = $_.CVUE_ID__c
-        Legacy_Id__c       = $_.Id
-        CreatedDate        = Format-DateTime -d $_.CreatedDate
-        LastModifiedDate   = Format-DateTime -d $_.LastModifiedDate
-        New_Custom_Field__c = $_.New_Custom_Field__c  # Map the new custom field here
+        Name                = $_.Name
+        Type                = "Partner"
+        RecordTypeId        = $collegeAccountRT
+        BillingStreet       = $_.EnrollmentrxRx__School_Address__c
+        BillingCity         = $_.EnrollmentrxRx__School_City__c
+        BillingStateCode    = $billingState
+        BillingPostalCode   = $_.EnrollmentrxRx__School_Zip__c
+        BillingCountryCode  = if ($billingState) { "US" } else { $null }
+        Anthology_ID__c     = $_.CVUE_ID__c
+        Legacy_Id__c        = $_.Id
+        CreatedDate         = Format-DateTime -d $_.CreatedDate
+        LastModifiedDate    = Format-DateTime -d $_.LastModifiedDate
+        New_Custom_Field__c = $_.New_Custom_Field__c  # Map the new custom field here, inline translation can be applied if needed
     }
 } | Export-Csv -Path data\InstitutionAccounts.csv -NoTypeInformation -Encoding UTF8
 
