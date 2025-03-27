@@ -1149,5 +1149,27 @@
   "schoolDecision": {
     "Application Accepted": "Admit",
     "Application Rejected": "Deny"
+  },
+  "ethnicity": {
+    "Hispanic or Latino": "Hispanic or Latino",
+    "Not Hispanic or Latino": "Not Hispanic or Latino",
+    "Yes": "Hispanic or Latino",
+    "No": "Not Hispanic or Latino"
+  },
+  "race": {
+    "Asian": "Asian",
+    "Black or African American": "Black or African American",
+    "Native Hawaiian or Other Pacific Islander": "Native Hawaiian or Other Pacific Islander",
+    "Native Hawaiian or Pacific Islander": "Native Hawaiian or Other Pacific Islander",
+    "White": "White",
+    "American Indian or Alaska Native": "American Indian or Alaska Native",
+    "American Indian or Alaskan Native": "American Indian or Alaska Native"
+  },
+  "sex": {
+    "Male": "Male",
+    "M": "Male",
+    "Female": "Female",
+    "F": "Female",
+    "Non-Binary": "Non-Binary"
   }
 }
