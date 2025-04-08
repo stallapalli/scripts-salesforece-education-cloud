@@ -49,7 +49,7 @@ To run the scripts in this notebook, you need to have the following dependencies
 
 1. **Salesforce CLI**: The Salesforce CLI is required to execute Salesforce commands. You can download and install it from [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli).
 2. **Salesforce Permisisons**: Ensure you have the necessary permissions to query and write data in both the source and target orgs. This includes permissions to access the objects and fields being migrated. There's a special permission set called "Data Migration" that can be assigned to the authorized user to give access to write to the CreatedDate and LastModifiedDate.
-3. **PowerShell**: Ensure you have PowerShell installed on your system. The scripts are written in PowerShell and require it to run.
+3. **PowerShell**: Ensure you have PowerShell installed on your system, Powershell version 7.0+ is recommended but is also required for any parallel processing. The scripts are written in PowerShell and require it to run. The [Powershell kernel](https://github.com/vors/jupyter-powershell) for Jupyter Notebooks is also required.
 4. **Jupyter Notebook**: The notebook is written in Jupyter Notebook format and can be run using Jupyter Notebook or JupyterLab.
 5. **File System**: The scripts write data to the file system, so ensure you have the necessary permissions to create and write to the appropriate directories.
 
@@ -277,3 +277,10 @@ sf data upsert bulk --file data\InstitutionAccounts.csv --target-org $target --s
 ### Salesforce Automation
 Certain Salesforce automations, such as Flows or Declarative Lookup Rollup Summaries, may be triggered by the data migration process. 
 It is important to ensure that the appropriate automations are disabled during the migration process to prevent unintended side effects, row lock issues, or increased processing time.
+
+#### Salesforce Flows:
+- [ ] All Opportunity create + update flows should be marked as inactive.
+#### Declarative Lookup Rollup Summaries:
+- [ ] Declarative Lookup Rollup Summaries should be disabled for the duration of the migration process. 
+- [ ] Opportunity DLRS trigger removed for the duration of the migration process.
+- [ ] DLRS can be re-enabled and reprocessed after the migration is complete.
