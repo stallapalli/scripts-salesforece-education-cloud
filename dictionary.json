@@ -1106,7 +1106,7 @@
     "Application in Progress": "Application In Progress",
     "Application Accepted": "Decision",
     "Future Start Deposited": "Future Start Deposited",
-    "Application Received": "Application in Review"
+    "Application Received": "Application In Progress"
   },
   "consultationStatus": {
     "Scheduled": "Scheduled",
